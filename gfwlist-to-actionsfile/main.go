@@ -265,6 +265,28 @@ Outer:
 }
 
 var (
-	regxIsDomain          = regexp.MustCompile(`[.:](?:\d+|a[cdefgilmorstuvz]|asia|b[adefghijnorstwyz]|biz|c[acdfghiklmnoruyz]|cat|city|club|com|d[ejkmoz]|e[cegstu]|edu|f[ijmr]|fit|g[adeghilmprty]|gov|h[knrtu]|i[edlmnoqrst]|info|j[emop]|k[eghirwz]|l[abikstuvy]|m[adegklmnstuvwxyz]|mil|mobi|n[aefgilopruz]|name|net|ninja|om|org|p[aeghklnrstwy]|press|pro|qa|r[osuw]|red|s[abceghiklmnortuv]|t[cdghjklmnortvwz]|today|u[agksyz]|v[ceginu]|ws|wang|wiki|work|xxx|xyz|z[amw])$`)
+	regxIsDomain = regexp.MustCompile(
+		`[.:](?:\d+` +
+			`|a[cdefgilmorstuvz]|asia` +
+			`|b[adefghijnorstwyz]|biz|blue` +
+			`|c[acdfghiklmnoruyz]|cat|city|club|com` +
+			`|d[ejkmoz]|e[cegstu]|edu` +
+			`|f[ijmor]|fit` +
+			`|g[adeghilmprty]|gov` +
+			`|h[knrtu]` +
+			`|i[edlmnoqrst]|info` +
+			`|j[emop]|k[eghirwz]` +
+			`|l[abikstuvy]|life` +
+			`|m[adegklmnostuvwxyz]|mil|mobi|moe` +
+			`|n[aefgilopruz]|name|net|news|ninja` +
+			`|om|org` +
+			`|p[aeghklnrstwy]|press|pro` +
+			`|qa|r[osuw]|red` +
+			`|s[abceghiklmnortuv]|solutions|space` +
+			`|t[cdghjklmnortvwz]|tech|today|top` +
+			`|u[agksyz]|v[ceginu]|vip` +
+			`|ws|wang|wiki|work` +
+			`|xxx|xyz` +
+			`|yt|z[amw])$`)
 	regxSpecialCharacters = regexp.MustCompile("[.+?]")
 )
