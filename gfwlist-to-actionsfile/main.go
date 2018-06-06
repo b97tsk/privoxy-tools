@@ -38,7 +38,7 @@ func main() {
 	s := bufio.NewScanner(reader)
 	for s.Scan() {
 		line := s.Text()
-		if len(line) == 0 {
+		if line == "" {
 			continue
 		}
 		switch line[0] {
@@ -126,7 +126,7 @@ func parse(pattern string) (rules, excepts []string) {
 		} else {
 			path, pattern = pattern, ""
 		}
-		if len(pattern) > 0 {
+		if pattern != "" {
 			if strings.Index(pattern, ",") > -1 {
 				return
 			}
@@ -147,7 +147,7 @@ func parse(pattern string) (rules, excepts []string) {
 	if includesSubdomains && net.ParseIP(domain) == nil {
 		domain = "." + domain
 	}
-	if len(path) > 0 {
+	if path != "" {
 		if strings.HasPrefix(path, "^") {
 			path = path[1:]
 		}
@@ -164,9 +164,9 @@ func parse(pattern string) (rules, excepts []string) {
 			path = regxSpecialCharacters.ReplaceAllString(path, "\\$0")
 			path = strings.Replace(path, "^", "\\b", -1)
 			path = strings.Replace(path, "*", ".*", -1)
-			if len(domain) == 0 && strings.HasPrefix(path, "/") {
+			if domain == "" && strings.HasPrefix(path, "/") {
 				path = "/(.*/)?" + path[1:]
-			} else if len(path) > 0 && !strings.HasPrefix(path, "/") {
+			} else if path != "" && !strings.HasPrefix(path, "/") {
 				if strings.HasPrefix(path, ".*") {
 					path = "/" + path
 				} else {
@@ -175,7 +175,7 @@ func parse(pattern string) (rules, excepts []string) {
 			}
 		}
 	}
-	if len(domains) > 0 && len(domain) == 0 {
+	if len(domains) > 0 && (domain == "" || domain == "*") {
 		for _, dm := range domains {
 			isexcept := isException
 			if strings.HasPrefix(dm, "~") {
@@ -203,7 +203,7 @@ func parse(pattern string) (rules, excepts []string) {
 		if strings.HasSuffix(domain, "*") {
 			domain = domain[:len(domain)-1]
 		}
-		if len(domain)+len(path) > 0 {
+		if domain != "" || path != "" {
 			if isException {
 				excepts = append(excepts, domain+path)
 			} else {
